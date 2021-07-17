@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <title>About us</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+  <style>
+    section {
+      padding: 60px 0;
+      overflow: hidden;
+    }
+    
+    .section-title {
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    
+    .section-title h2 {
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      position: relative;
+      color: #45505b;
+    }
+    
+    .section-title h2::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 120px;
+      height: 1px;
+      background: #ddd;
+      bottom: 1px;
+      left: calc(50% - 60px);
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #0563bb;
+      bottom: 0;
+      left: calc(50% - 20px);
+    }
+    
+    .section-title p {
+      margin-bottom: 0;
+    }
+    
+    /*--------------------------------------------------------------
+    # About
+    --------------------------------------------------------------*/
+    .about .content h3 {
+      font-weight: 700;
+      font-size: 26px;
+      color: #728394;
+    }
+    
+    .about .content ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .about .content ul li {
+      padding-bottom: 10px;
+    }
+    
+    .about .content ul i {
+      font-size: 20px;
+      padding-right: 2px;
+      color: #0563bb;
+    }
+    
+    .about .content p:last-child {
+      margin-bottom: 0;
+    }    
+    .skills .progress {
+      height: 50px;
+      display: block;
+      background: none;
+    }
+    
+    .skills .progress .skill {
+      padding: 10px 0;
+      margin: 0 0 6px 0;
+      text-transform: uppercase;
+      display: block;
+      font-weight: 600;
+      font-family: "Poppins", sans-serif;
+      color: #45505b;
+    }
+    
+    .skills .progress .skill .val {
+      float: right;
+      font-style: normal;
+    }
+    
+    .skills .progress-bar-wrap {
+      background: #f2f3f5;
+    }
+    
+    .skills .progress-bar {
+     width:1px;
+      height: 10px;
+      transition: .9s;
+      background-color: #0563bb;
+    }
+    #progress-bar1{
+      width: 100%;
+    }
+    #progress-bar2{
+      width: 90%;
+    }
+    #progress-bar3{
+      width: 75%;
+    }
+    #progress-bar4{
+      width: 80%;
+    }
+    #progress-bar5{
+      width: 95%;
+    }
+    #progress-bar6{
+      width: 95%;
+    }
+    #progress-bar7{
+      width: 90%;
+    }
+    #progress-bar8{
+      width: 80%;
+    }
+  </style>
+</head>
+{%include 'base.html'%}
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>About Me</h2>
+      <p>I am Yash Parmar. I am front-end and back-end Developer from india. I like to accept Challanges.</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="{% static 'yash.png'%}" class="img-fluid rounded" alt="myimage">
+      </div>
+      <div class="col-lg-8 pt-4 pt-lg-0 content">
+        <h3 class="text-dark">Full Stack Developer</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="icofont-rounded-right"></i> <strong>Birthday : </strong>24<sup>th</sup> March,2003</li>
+              <li><i class="icofont-rounded-right"></i> <strong>github : </strong><a href="https://github.com/Yash-1511" target="_blank" class="text-dark">View Profile</a> </li>
+              <li><i class="icofont-rounded-right"></i> <strong>Phone : </strong>6351888030</li>
+              <li><i class="icofont-rounded-right"></i> <strong>City : </strong>Ahmedabad,Gujarat,india</li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="icofont-rounded-right"></i> <strong>Age : </strong>18</li>
+              <li><i class="icofont-rounded-right"></i> <strong>Degree : </strong>Bachelor</li>
+              <li><i class="icofont-rounded-right"></i> <strong>Email : </strong>yashp3020@gmail.com</li>
+              <li><i class="icofont-rounded-right"></i> <strong>Freelance :</strong> Available</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section><!-- End About Section -->
+<section id="skills" class="skills section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Skills</h2>
+    </div>
+
+    <div class="row skills-content">
+
+      <div class="col-lg-6">
+
+        <div class="progress">
+          <span class="skill">HTML <i class="val">100%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="progress-bar1" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+        <div class="progress">
+          <span class="skill">CSS <i class="val">90%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar"  id="progress-bar2" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+        <div class="progress">
+          <span class="skill">JavaScript <i class="val">75%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar"  id="progress-bar3" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="progress">
+          <span class="skill">Java <i class="val">80%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar"  id="progress-bar8" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-6">
+
+        <div class="progress">
+          <span class="skill">PHP <i class="val">80%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar" id="progress-bar4"aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+        <div class="progress">
+          <span class="skill">C/C++<i class="val">95%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar" id="progress-bar5" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+        <div class="progress">
+          <span class="skill">Python<i class="val">95%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar"id="progress-bar6" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="progress">
+          <span class="skill">Django<i class="val">90%</i></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" role="progressbar"id="progress-bar7" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<footer class="container-fluid bg-dark my-0 py-3 text-light" style="background-color:#120321 !important;"><p class="mb-0 text-center">Copyright © 2020-2021 CodeBlog.com</p></footer>
+<body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+crossorigin="anonymous"></script>
+
+</body>
+
+</html>

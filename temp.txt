@@ -1,0 +1,8 @@
+1 . first open modal in user. (complete)
+2. registration form astratic symbol. (complete)
+3. top button fix
+4. add content in home page. (complete)
+5. About page design.(complete)
+6. contact page fix. (complete)
+7. add amazing blog.
+8. comment reply.

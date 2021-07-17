@@ -1,0 +1,150 @@
+{%load static%}
+<!-- sign up Modal -->
+<div class="modal fade" id="signupmodal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/signup/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="username" name="username" autocomplete="off" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="off" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="form-group">
+            <label for="cpassword">Confirm Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="cpassword" name="cpassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Signup</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btncolor" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- sign up modal ends here  -->
+<!-- login Modal -->
+<div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/login/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="loginusername" name="loginusername" autocomplete="off" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control"  id="loginpassword" name="loginpassword" required>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" class="py-2" onclick="myFunction()"> Show Password
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btncolor" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- login modal ends here  -->
+<!-- user modal starts here -->
+<div class="modal fade" id="usermodal" tabindex="-1" aria-labelledby="userModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="usermodal"><h4 class="text-danger">Welcome To Our CodeBlog</h4></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div class="container">
+         <div class="row">
+           <ul>
+             <li>id: {{user.id}}</li>
+             <li>Username: {{request.user}}</li>
+             <li>Email: {{user.email}}</li>
+           </ul>
+         </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <a href="/logout">
+        <button type="button" class="btn btncolor">Logout &rAarr;</button>
+       </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- user modal ends here -->
+<nav class="navbar navbar-expand-lg" style="background-color:#120321 !important; box-shadow:1px 1px 3px rgba(61, 59, 59, 0.247);" id="home">
+    <a class="navbar-brand" href="/" style="color: #4d4dff !important; font-weight:600 !important;">CodeBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" method="GET" action="/search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" name="search">
+        <button class="btn btncolor my-2 my-sm-0 mx-lg-2" type="submit">Search</button>
+      </form>
+      <div class="mx-0">
+        {% if user.is_authenticated %}
+          <button class="btn btncolor"data-toggle="modal" data-target="#usermodal" ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;{{request.user}}</button>
+        {% else %}
+        <button class="btn btncolor" type="button" data-toggle="modal" data-target="#loginmodal">Login</button>
+        <button class="btn btncolor" type="button" data-toggle="modal" data-target="#signupmodal">Signup</button>
+        {% endif %}
+      </div>
+    </div>
+</nav>
+<script>
+  function myFunction() {
+    var x = document.getElementById("loginpassword");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>

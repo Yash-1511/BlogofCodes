@@ -1,0 +1,162 @@
+{% load static %}
+{% load humanize %}
+{% load extras%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="{% static 'prism.css' %}">
+  <title>Blog Post</title>
+  <style>
+    .jumbotron {
+      border-radius: 0 !important;
+    }
+
+    @media (max-width: 993px) {
+      .commentImg {
+        display: none !important;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />
+</head>
+
+<body>
+  {%include 'base.html'%}
+  <div class="container my-4">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{post.title}}</h2>
+      <p class="blog-post-meta">{{post.timestamp}} by {{post.author}}</p>
+      {{post.content|safe}}
+    </div>
+    <hr />
+  </div>
+  {% comment %} one section {% endcomment %}
+  <div class="container">
+    {% if user.is_authenticated %}
+    <form action="/blog/postcomment/" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" class="form-control" id="comments" name="comments" placeholder="Enter your comments here"
+          style="height: 70px" />
+      </div>
+      <input type="hidden" name="parentsrno" value="" />
+      <input type="hidden" name="srno" value="{{post.srno}}" />
+      <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+    {% else %}
+    <h4 class="text-danger">You need to be logged in to post a comment!</h4>
+    {% endif%}
+  </div>
+  {% comment %} second section {% endcomment %}
+  <div class="container">
+    <div class="comments my-4">
+      {% if comments.count == 0 %}
+      <h5>No Comments yet. Be the first person to post a comment!</h5>
+      {%else%}
+      <h2 class="my-3">{{comments.count}} Comments</h2>
+      {%for comment in comments%}
+      <div class="row mt-4">
+        <div class="col-sm-3 col-lg-1 col-xl-1">
+          <img src="{%static 'comment.png'%}" class="w-100 commentImg d-block mx-auto rounded-circle" />
+        </div>
+        <div class="col-md-8 col-lg-10 col-xl-10 commentContainer">
+          <div class="my-2 mx-2">
+            <b>{{comment.user}} </b><span class="badge badge-secondary">{{comment.timestamp|naturaltime}}</span><br />
+            <div class="commentPre">{{comment.comment}}</div>
+          </div>
+        </div>
+      </div>
+    {%endfor%} {% endif %}
+  </div>
+  </div>
+
+  <footer class="container-fluid bg-dark my-0 py-3 text-light" style="background-color: #120321 !important">
+    <p class="mb-0 text-center">Copyright &copy; 2020-2021 CodeBlog.com</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+    swal("success", "{{message}}", "success");
+    {% else %}
+    swal("error", "{{message}}", "error")
+    {% endif %}
+    {% endfor %}
+  </script>
+  <script src="{% static 'prism.js'%}"></script>
+</body>
+
+</html>
+{% comment %} <div class="reply"> {% endcomment %}
+  {% comment %} <p> {% endcomment %}
+    {% comment %}
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+      aria-controls="collapseExample">
+      Link with href
+    </a>
+    {% endcomment %}
+    {% comment %} {%if user.is_authenticated%}
+    <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replybox{{comment.srno}}"
+      aria-expanded="false" aria-controls="collapseExample">
+      Add Reply
+    </button>
+    {%endif%}
+  </p>
+  <div class="collapse" id="replybox{{comment.srno}}">
+    <div class="card card-body">
+      {% if user.is_authenticated %}
+      <form action="/blog/postcomment/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" class="form-control" id="comments" name="comments" placeholder="Enter your comments here"
+            style="height: 70px" />
+          <input type="hidden" name="parentsrno" value="{{comment.srno}}" />
+        </div>
+        <input type="hidden" name="srno" value="{{post.srno}}" />
+        <button type="submit" class="btn btn-primary">
+          Add Reply
+        </button>
+      </form>
+      {%endif%}
+    </div>
+  </div>
+  <div class="replies">
+    <a class="text-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+      aria-controls="collapseExample">
+      show replies
+    </a>
+    {% for reply in reptdict|get_val:comment.srno %}
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <div class="commentReplies">
+          <div class="row my-3">
+            <div class="col-sm-3 col-lg-1 col-xl-1">
+              <img src="{%static 'comment.png'%}" class="w-100 commentImg d-block mx-auto rounded-circle" />
+            </div>
+            <div class="col-md-8 col-lg-10 col-xl-10">
+              <div class="my-2 mx-2"><b>{{reply.user}}</b> <span class="badge badge-secondary">
+                  {{reply.timestamp|naturaltime}}
+                </span><br>
+                <div class="commentPre">{{reply.comment}}</div>
+                <div class="my-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %} {% endcomment %}

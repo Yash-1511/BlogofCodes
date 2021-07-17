@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <title>Search Page</title>
+    <style>
+        .jumbotron {
+            border-radius: 0 !important;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+</head>
+
+<body>
+    {%include 'base.html'%}
+    <h3 class="text-center my-4">Search Results</h3>
+    {% if allpost|length < 1 %} <div class="container my-3">
+            <p>No search Results</p>
+            <p>Your search: <strong>{{query}}</strong> - Did not match any blogs.</p>
+            <p><strong>Suggestions</strong></p>
+            <ul>
+                <li>Make Sure that all words are spelled correctly</li>
+                <li>Try different Keywords</li>
+                <li>Try more general keywords</li>
+                <li>Try fewer keywords</li>
+            </ul>
+        </div>
+        {% endif %}
+        {% for post in allpost %}
+        <div class="container my-4">
+            <div class="card my-4" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                <h5 class="card-header text-white" style="background-color: #2d3436;
+    background-image: linear-gradient(315deg, #2d3436 0%, #0a0a0a 74%);">{{post.title}}</h5>
+                <div class="card-body" style="background-color: #f1ffff;">
+                    <h5 class="card-title">Article By : {{post.author}}</h5>
+                    <p class="card-text">{{post.content | truncatechars:100|safe}}</p>
+                    <a href="/blog/{{post.slug}}" class="btn btn-primary">Read More...</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
